@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@onflow/fcl": "^1.3.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -13,10 +14,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start:local": "REACT_APP_FLOW_NETWORK=local react-scripts start",
+    "start:testnet": "REACT_APP_FLOW_NETWORK=testnet react-scripts start",
+    "build": "REACT_APP_FLOW_NETWORK=mainnet react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:widget": "parcel build src/index.js --no-source-maps --dist-dir widget && cp build/static/css/*.css widget/index.css"
+    "build:widget": "REACT_APP_FLOW_NETWORK=mainnet parcel build src/index.js --no-source-maps --dist-dir widget && cp build/static/css/*.css widget/index.css"
   },
   "eslintConfig": {
     "extends": [
