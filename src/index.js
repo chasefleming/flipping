@@ -1,17 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const widgetDivs = document.querySelectorAll('.flipping-widget');
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// Inject our React App into each class
+widgetDivs.forEach(div => {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App address={div.dataset.address} amount={div.dataset.amount}/>
+      </React.StrictMode>,
+        div
+    );
+});
