@@ -7,13 +7,15 @@ export default function TipModal({ address, amount, handleClose, isOpen }) {
   const [selectedAddress, setSelectedAddress] = useState(address)
 
   const executeTransaction = useCallback(async () => {
-    await fcl.mutate({
-      template: "https://flix.flow.com/v1/templates?name=transfer-flow",
-      args: (arg, t) => [
-        arg(selectedAmount, t.UFix64),
-        arg(selectedAddress, t.Address),
-      ],
-    })
+    try {
+      await fcl.mutate({
+        template: "https://flix.flow.com/v1/templates?name=transfer-flow",
+        args: (arg, t) => [
+          arg(selectedAmount, t.UFix64),
+          arg(selectedAddress, t.Address),
+        ],
+      })
+    } catch (e) {}
   }, [selectedAddress, selectedAmount])
 
   return ReactDOM.createPortal(
@@ -23,6 +25,7 @@ export default function TipModal({ address, amount, handleClose, isOpen }) {
       className="modal-wrapper"
     >
       <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
+        <h2>Send a tip</h2>
         <p>
           <div className="modal-row">
             {"Tip: "}
