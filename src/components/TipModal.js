@@ -39,10 +39,7 @@ export default function TipModal({ address, amount, handleClose, isOpen }) {
         <p>
           <div className="modal-row">
             {"To: "}
-            <input
-              value={selectedAddress}
-              onChange={(e) => setSelectedAddress(e.target.value)}
-            ></input>
+            {selectedAddress}
           </div>
         </p>
         <button onClick={executeTransaction}>Send Tip</button>
