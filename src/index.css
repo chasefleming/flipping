@@ -14,7 +14,7 @@ code {
 
 .modal-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -27,6 +27,7 @@ code {
 
 .modal-inner {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 200px;
@@ -34,4 +35,9 @@ code {
   background-color: white;
   border-radius: 24px;
   padding: 24px;
+}
+
+.modal-row {
+  display: flex;
+  flex-direction: row;
 }
