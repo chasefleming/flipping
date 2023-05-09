@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useRef } from "react"
+import React, { useCallback, useState } from "react"
 import ReactDOM from "react-dom"
 import * as fcl from "@onflow/fcl"
 

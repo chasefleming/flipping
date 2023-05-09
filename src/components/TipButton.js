@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import TipModal from "./TipModal"
+import { Button } from '@chakra-ui/react'
 
-export default function TipButton({ address, amount }) {
+export default function TipButton({ address, amount, bgColor, size }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const sendTip = async () => {
     console.log("Sending tip...")
@@ -18,7 +19,10 @@ export default function TipButton({ address, amount }) {
         isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
       />
-      <button onClick={sendTip}>Tip {address}</button>
+      <Button 
+        colorScheme={bgColor} 
+        size={size}
+        onClick={sendTip}>Tip {address}</Button>
     </div>
   )
 }

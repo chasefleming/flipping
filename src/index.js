@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const widgetDivs = document.querySelectorAll('.flipping-widget');
 
@@ -9,7 +10,14 @@ const widgetDivs = document.querySelectorAll('.flipping-widget');
 widgetDivs.forEach(div => {
     ReactDOM.render(
       <React.StrictMode>
-        <App address={div.dataset.address} amount={div.dataset.amount}/>
+        <ChakraProvider>
+          <App 
+            address={div.dataset.address} 
+            amount={div.dataset.amount} 
+            bgColor={div.dataset.bgColor}
+            size={div.dataset.size}
+          />
+        </ChakraProvider>
       </React.StrictMode>,
         div
     );
