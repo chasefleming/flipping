@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"
-import ReactDOM from "react-dom"
+import React, { useState } from "react"
 import TipModal from "./TipModal"
 
 export default function TipButton({ address, amount }) {
