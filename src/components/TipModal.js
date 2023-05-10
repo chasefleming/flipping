@@ -1,50 +1,136 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import * as fcl from "@onflow/fcl"
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  Lorem,
+  Box,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
+  SliderMark,
+  Text,
+  Highlight,
+  CircularProgress,
+} from "@chakra-ui/react"
 
-export default function TipModal({ address, amount, name, handleClose, isOpen }) {
+export default function TipModal({
+  address,
+  amount,
+  name,
+  message,
+  handleClose,
+  isOpen,
+}) {
   const [selectedAmount, setSelectedAmount] = useState(amount)
+
+  const [txId, setTxId] = useState(null)
+  const [txProgress, setTxProgress] = useState(null)
+
+  const closeModal = useCallback(() => {
+    setTxId(null)
+    setTxProgress(null)
+    handleClose()
+  })
 
   const executeTransaction = useCallback(async () => {
     try {
-      await fcl.mutate({
+      const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
           arg(selectedAmount, t.UFix64),
           arg(address, t.Address),
         ],
       })
+      setTxId(txId)
     } catch (e) {}
   }, [address, selectedAmount])
 
+  const labelStyles = {
+    mt: "2",
+    ml: "-2.5",
+    fontSize: "sm",
+  }
+
+  useEffect(() => {
+    setSelectedAmount(amount)
+  }, [amount])
+
   return ReactDOM.createPortal(
-    <div
-      onClick={handleClose}
-      style={{ display: isOpen ? "flex" : "none" }}
-      className="modal-wrapper"
-    >
-      <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
-        <h2>Send a Tip</h2>
-        <h3>To {name}</h3>
-        <p>
-          <div className="modal-row">
-            {"Tip: "}
-            <input
-              value={selectedAmount}
-              onChange={(e) => setSelectedAmount(e.target.value)}
-            ></input>
-            {" FLOW"}
-          </div>
-        </p>
-        <p>
-          <div className="modal-row">
+    <Modal isOpen={isOpen} onClose={closeModal}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>
+          {"Send a tip to: "}
+          {name}
+        </ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <Text pb={4} className="modal-row">
+            {message}
+          </Text>
+          <Text className="modal-row">
             {"To: "}
             {address}
-          </div>
-        </p>
-        <button onClick={executeTransaction}>Send Tip</button>
-      </div>
-    </div>,
+          </Text>
+          <Text pb={4} className="modal-row">
+            {"Amount: "}
+            {selectedAmount}
+          </Text>
+          <Box pt={8} pb={2}>
+            <Slider
+              aria-label="slider-ex-6"
+              min={1}
+              defaultValue={selectedAmount}
+              onChange={(val) => setSelectedAmount(val)}
+            >
+              <SliderMark value={25} {...labelStyles}>
+                25 FLOW
+              </SliderMark>
+              <SliderMark value={50} {...labelStyles}>
+                50 FLOW
+              </SliderMark>
+              <SliderMark value={75} {...labelStyles}>
+                75 FLOW
+              </SliderMark>
+              <SliderMark
+                value={selectedAmount}
+                textAlign="center"
+                bg="blue.500"
+                borderRadius="5"
+                color="white"
+                mt="-10"
+                ml="-5"
+                w="20"
+              >
+                {selectedAmount} FLOW
+              </SliderMark>
+              <SliderTrack>
+                <SliderFilledTrack />
+              </SliderTrack>
+              <SliderThumb />
+            </Slider>
+          </Box>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button colorScheme="blue" mr={3} onClick={executeTransaction}>
+            Send
+          </Button>
+          <Button variant="ghost" onClick={closeModal}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>,
     document.documentElement
   )
 }
