@@ -2,7 +2,7 @@ import "./App.css"
 import TipButton from "./components/TipButton"
 import "./config/fcl"
 
-function App({ address, amount, name, message, bgColor, size }) {
+function App({ address, amount, name, message, image, bgColor, size }) {
   return (
     <div>
       <TipButton
@@ -10,6 +10,7 @@ function App({ address, amount, name, message, bgColor, size }) {
         amount={amount}
         name={name}
         message={message}
+        image={image}
         bgColor={bgColor}
         size={size}
       />
