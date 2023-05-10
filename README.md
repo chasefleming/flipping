@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Flipping
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Flipping Widget is a simple, easy-to-use tipping widget for the [Flow blockchain](https://flow.com/). It allows you to quickly and easily accept tips from your visitors on your website or application. This guide will walk you through the steps necessary to integrate the Flipping Widget into your site.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+**Import the CSS and JavaScript files.** Place the following lines of code in your HTML file. Typically, these lines go in the <head> section of your HTML file, but they can be placed anywhere as long as they're loaded before the widget code.
 
-### `npm start`
+```html
+<link href="widget/index.css" rel="stylesheet" />
+<script src="widget/index.js"></script>
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Usage
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Embed the widget** into your website or application by adding the following HTML snippet where you want the widget to appear.
 
-### `npm test`
+```html
+<div
+  data-address="0x123"
+  data-amount="5.0"
+  data-name="Joe Schmo"
+  data-message="Hi I'm Joe Schmo, please donate!"
+  class="flipping-widget"
+  data-bg-color="blue"
+></div>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Here's what each attribute does:
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `id`: This attribute is used to uniquely identify each Flipping Widget instance. This needs to be unique if you have multiple instances on the same page.
+  data-address: This is your Flow blockchain address where the tips will be sent.
+  data-amount: This is the default tipping amount. Visitors can change this if they wish.
+- `data-name`: This is your display name. This will be shown on the widget.
+- `data-message`: This is a message to your visitors. You can use it to thank them for their donation or to encourage them to donate.
+- `data-bg-color`: This changes the background color of the widget. This should be any valid CSS color value. (_accepts most common color names...e.g. blue, red, green, etc._)
