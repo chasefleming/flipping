@@ -41,8 +41,8 @@ export default function TipModal({
   isOpen,
 }) {
   const [selectedAmount, setSelectedAmount] = useState(amount)
-
   const [txId, setTxId] = useState(null)
+  const [txError, setTxError] = useState(null)
   const [txProgress, setTxProgress] = useState(null)
 
   const closeModal = useCallback(() => {
