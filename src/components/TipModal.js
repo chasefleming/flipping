@@ -20,6 +20,15 @@ import {
   Text,
   Highlight,
   CircularProgress,
+  CircularProgressLabel,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Image,
+  HStack,
+  VStack,
+  Stack,
 } from "@chakra-ui/react"
 
 export default function TipModal({
@@ -27,6 +36,7 @@ export default function TipModal({
   amount,
   name,
   message,
+  image,
   handleClose,
   isOpen,
 }) {
@@ -43,6 +53,7 @@ export default function TipModal({
 
   const executeTransaction = useCallback(async () => {
     try {
+      setTxError(null)
       const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
@@ -53,6 +64,37 @@ export default function TipModal({
       setTxId(txId)
     } catch (e) {}
   }, [address, selectedAmount])
+
+  useEffect(() => {
+    if (txId) {
+      setTxProgress(0)
+      return fcl.tx(txId).subscribe((tx) => {
+        if (tx.errorMessage) {
+          setTxError(
+            "Something went wrong. Please check the recipient address is valid, and that you have sufficient FLOW to tip."
+          )
+          setTxProgress(null)
+          setTxId(null)
+          return
+        }
+
+        switch (true) {
+          case fcl.tx.isSealed(tx):
+            setTxProgress(100)
+            return
+          case fcl.tx.isExecuted(tx):
+            setTxProgress(75)
+            return
+          case fcl.tx.isFinalized(tx):
+            setTxProgress(25)
+            return
+          case fcl.tx.isPending(tx):
+            setTxProgress(25)
+            return
+        }
+      })
+    }
+  }, [txId])
 
   const labelStyles = {
     mt: "2",
@@ -73,62 +115,116 @@ export default function TipModal({
           {name}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
-          <Text pb={4} className="modal-row">
-            {message}
-          </Text>
-          <Text className="modal-row">
-            {"To: "}
-            {address}
-          </Text>
-          <Text pb={4} className="modal-row">
-            {"Amount: "}
-            {selectedAmount}
-          </Text>
-          <Box pt={8} pb={2}>
-            <Slider
-              aria-label="slider-ex-6"
-              min={1}
-              defaultValue={selectedAmount}
-              onChange={(val) => setSelectedAmount(val)}
-            >
-              <SliderMark value={25} {...labelStyles}>
-                25 FLOW
-              </SliderMark>
-              <SliderMark value={50} {...labelStyles}>
-                50 FLOW
-              </SliderMark>
-              <SliderMark value={75} {...labelStyles}>
-                75 FLOW
-              </SliderMark>
-              <SliderMark
-                value={selectedAmount}
-                textAlign="center"
-                bg="blue.500"
-                borderRadius="5"
-                color="white"
-                mt="-10"
-                ml="-5"
-                w="20"
-              >
-                {selectedAmount} FLOW
-              </SliderMark>
-              <SliderTrack>
-                <SliderFilledTrack />
-              </SliderTrack>
-              <SliderThumb />
-            </Slider>
-          </Box>
+        <ModalBody pt="0">
+          {txId === null && (
+            <>
+              <Stack direction="row" align="center" pb="4">
+                {image && (
+                  <Box pr="4">
+                    <Image
+                      width="150px"
+                      borderRadius="full"
+                      objectFit="cover"
+                      src={image}
+                    />
+                  </Box>
+                )}
+                <Text fontSize="2xl" as="i" color="grey" className="modal-row">
+                  {'"'}
+                  {message}
+                  {'"'}
+                </Text>
+              </Stack>
+              <Text className="modal-row">
+                <span>
+                  <Text as="b">{"To: "}</Text> {address}
+                </span>
+              </Text>
+              <Text pb={4} className="modal-row">
+                <span>
+                  <Text as="b">{"Amount: "}</Text> {selectedAmount}
+                  {" FLOW"}
+                </span>
+              </Text>
+              <Box pt={8} pb={2}>
+                <Slider
+                  aria-label="slider-ex-6"
+                  min={1}
+                  max={20}
+                  defaultValue={selectedAmount}
+                  onChange={(val) => setSelectedAmount(val)}
+                >
+                  <SliderMark value={5} {...labelStyles}>
+                    5 FLOW
+                  </SliderMark>
+                  <SliderMark value={10} {...labelStyles}>
+                    10 FLOW
+                  </SliderMark>
+                  <SliderMark value={15} {...labelStyles}>
+                    15 FLOW
+                  </SliderMark>
+                  <SliderMark
+                    value={selectedAmount}
+                    textAlign="center"
+                    bg="blue.500"
+                    borderRadius="5"
+                    color="white"
+                    mt="-10"
+                    ml="-5"
+                    w="20"
+                  >
+                    {selectedAmount} FLOW
+                  </SliderMark>
+                  <SliderTrack>
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                  <SliderThumb />
+                </Slider>
+              </Box>
+            </>
+          )}
+          {txProgress !== null &&
+            (txProgress === 0 ? (
+              <>
+                <CircularProgress isIndeterminate color="blue.400" />
+                <Text className="modal-row">{"Submitting Transaction..."}</Text>
+              </>
+            ) : (
+              <>
+                <CircularProgress value={txProgress} color="blue.400">
+                  <CircularProgressLabel>{txProgress}%</CircularProgressLabel>
+                </CircularProgress>
+                <Text className="modal-row">
+                  {txProgress === 100
+                    ? "Transaction Complete! Thanks for Flipping"
+                    : "Transaction is Executing..."}
+                </Text>
+              </>
+            ))}
         </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={executeTransaction}>
-            Send
-          </Button>
-          <Button variant="ghost" onClick={closeModal}>
-            Cancel
-          </Button>
-        </ModalFooter>
+        {txProgress !== null ? (
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={closeModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        ) : (
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={executeTransaction}>
+              Send
+            </Button>
+            <Button variant="ghost" onClick={closeModal}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        )}
+        {txError && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle>An error occurred</AlertTitle>
+            <AlertDescription>{txError}</AlertDescription>
+          </Alert>
+        )}
       </ModalContent>
     </Modal>,
     document.documentElement
