@@ -13,7 +13,8 @@ widgetDivs.forEach(div => {
         <ChakraProvider>
           <App 
             address={div.dataset.address} 
-            amount={div.dataset.amount} 
+            amount={div.dataset.amount}
+            name={div.dataset.name}
             bgColor={div.dataset.bgColor}
             size={div.dataset.size}
           />

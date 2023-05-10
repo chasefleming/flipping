@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react"
 import ReactDOM from "react-dom"
 import * as fcl from "@onflow/fcl"
 
-export default function TipModal({ address, amount, handleClose, isOpen }) {
+export default function TipModal({ address, amount, name, handleClose, isOpen }) {
   const [selectedAmount, setSelectedAmount] = useState(amount)
   const [selectedAddress, setSelectedAddress] = useState(address)
 
@@ -25,7 +25,8 @@ export default function TipModal({ address, amount, handleClose, isOpen }) {
       className="modal-wrapper"
     >
       <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
-        <h2>Send a tip</h2>
+        <h2>Send a Tip</h2>
+        <h3>To {name}</h3>
         <p>
           <div className="modal-row">
             {"Tip: "}

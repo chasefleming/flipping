@@ -2,12 +2,13 @@ import './App.css';
 import TipButton from './components/TipButton';
 import './config/fcl';
 
-function App({ address, amount, bgColor, size }) {
+function App({ address, amount, name, bgColor, size }) {
   return (
     <div>
       <TipButton 
         address={address} 
-        amount={amount} 
+        amount={amount}
+        name={name}
         bgColor={bgColor}
         size={size}
       />
