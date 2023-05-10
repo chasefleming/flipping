@@ -4,7 +4,6 @@ import * as fcl from "@onflow/fcl"
 
 export default function TipModal({ address, amount, name, handleClose, isOpen }) {
   const [selectedAmount, setSelectedAmount] = useState(amount)
-  const [selectedAddress, setSelectedAddress] = useState(address)
 
   const executeTransaction = useCallback(async () => {
     try {
@@ -12,11 +11,11 @@ export default function TipModal({ address, amount, name, handleClose, isOpen })
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
           arg(selectedAmount, t.UFix64),
-          arg(selectedAddress, t.Address),
+          arg(address, t.Address),
         ],
       })
     } catch (e) {}
-  }, [selectedAddress, selectedAmount])
+  }, [address, selectedAmount])
 
   return ReactDOM.createPortal(
     <div
@@ -40,7 +39,7 @@ export default function TipModal({ address, amount, name, handleClose, isOpen })
         <p>
           <div className="modal-row">
             {"To: "}
-            {selectedAddress}
+            {address}
           </div>
         </p>
         <button onClick={executeTransaction}>Send Tip</button>
