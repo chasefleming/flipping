@@ -21,6 +21,14 @@ import {
   Highlight,
   CircularProgress,
   CircularProgressLabel,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Image,
+  HStack,
+  VStack,
+  Stack,
 } from "@chakra-ui/react"
 
 export default function TipModal({
@@ -28,14 +36,14 @@ export default function TipModal({
   amount,
   name,
   message,
+  image,
   handleClose,
   isOpen,
 }) {
   const [selectedAmount, setSelectedAmount] = useState(amount)
-
   const [txId, setTxId] = useState(null)
-  const [txProgress, setTxProgress] = useState(null)
   const [txError, setTxError] = useState(null)
+  const [txProgress, setTxProgress] = useState(null)
 
   const closeModal = useCallback(() => {
     setTxId(null)
@@ -46,6 +54,7 @@ export default function TipModal({
 
   const executeTransaction = useCallback(async () => {
     try {
+      setTxError(null)
       const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
@@ -62,7 +71,9 @@ export default function TipModal({
       setTxProgress(0)
       return fcl.tx(txId).subscribe((tx) => {
         if (tx.errorMessage) {
-          setTxError("Error: " + tx.errorMessage)
+          setTxError(
+            "Something went wrong. Please check the recipient address is valid, and that you have sufficient FLOW to tip."
+          )
           setTxProgress(null)
           setTxId(null)
           return
@@ -105,35 +116,53 @@ export default function TipModal({
           {name}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody pt="0">
           {txId === null && (
             <>
-              <Text pb={4} className="modal-row">
-                {message}
-              </Text>
+              <Stack direction="row" align="center" pb="4">
+                {image && (
+                  <Box pr="4">
+                    <Image
+                      width="150px"
+                      borderRadius="full"
+                      objectFit="cover"
+                      src={image}
+                    />
+                  </Box>
+                )}
+                <Text fontSize="2xl" as="i" color="grey" className="modal-row">
+                  {'"'}
+                  {message}
+                  {'"'}
+                </Text>
+              </Stack>
               <Text className="modal-row">
-                {"To: "}
-                {address}
+                <span>
+                  <Text as="b">{"To: "}</Text> {address}
+                </span>
               </Text>
               <Text pb={4} className="modal-row">
-                {"Amount: "}
-                {selectedAmount}
+                <span>
+                  <Text as="b">{"Amount: "}</Text> {selectedAmount}
+                  {" FLOW"}
+                </span>
               </Text>
               <Box pt={8} pb={2}>
                 <Slider
                   aria-label="slider-ex-6"
                   min={1}
+                  max={20}
                   defaultValue={selectedAmount}
                   onChange={(val) => setSelectedAmount(val)}
                 >
-                  <SliderMark value={25} {...labelStyles}>
-                    25 FLOW
+                  <SliderMark value={5} {...labelStyles}>
+                    5 FLOW
                   </SliderMark>
-                  <SliderMark value={50} {...labelStyles}>
-                    50 FLOW
+                  <SliderMark value={10} {...labelStyles}>
+                    10 FLOW
                   </SliderMark>
-                  <SliderMark value={75} {...labelStyles}>
-                    75 FLOW
+                  <SliderMark value={15} {...labelStyles}>
+                    15 FLOW
                   </SliderMark>
                   <SliderMark
                     value={selectedAmount}
@@ -168,7 +197,7 @@ export default function TipModal({
                 </CircularProgress>
                 <Text className="modal-row">
                   {txProgress === 100
-                    ? "Transaction Complete!"
+                    ? "Transaction Complete! Thanks for Flipping"
                     : "Transaction is Executing..."}
                 </Text>
               </>
@@ -189,6 +218,13 @@ export default function TipModal({
               Cancel
             </Button>
           </ModalFooter>
+        )}
+        {txError && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle>An error occurred</AlertTitle>
+            <AlertDescription>{txError}</AlertDescription>
+          </Alert>
         )}
       </ModalContent>
     </Modal>,

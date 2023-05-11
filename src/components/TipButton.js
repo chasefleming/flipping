@@ -7,6 +7,7 @@ export default function TipButton({
   amount,
   name,
   message,
+  image,
   bgColor,
   size,
 }) {
@@ -25,6 +26,7 @@ export default function TipButton({
         amount={amount}
         name={name}
         message={message}
+        image={image}
         isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
       />

@@ -16,6 +16,7 @@ widgetDivs.forEach((div) => {
           amount={div.dataset.amount}
           name={div.dataset.name}
           message={div.dataset.message}
+          image={div.dataset.image}
           bgColor={div.dataset.bgColor}
           size={div.dataset.size}
         />
