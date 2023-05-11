@@ -34,3 +34,4 @@ Here's what each attribute does:
 - `data-name`: This is your display name. This will be shown on the widget.
 - `data-message`: This is a message to your visitors. You can use it to thank them for their donation or to encourage them to donate.
 - `data-bg-color`: This changes the background color of the widget. This should be any valid CSS color value. (_accepts most common color names...e.g. blue, red, green, etc._)
+- `data-size`: This changes the size of the widget. This should be either `xs`, `sm`, `md`, or `lg`.
