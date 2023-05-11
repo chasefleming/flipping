@@ -25,6 +25,8 @@ import {
   AlertDescription,
   Image,
   Stack,
+  Link,
+  Center,
 } from "@chakra-ui/react"
 
 export default function TipModal({
@@ -221,6 +223,11 @@ export default function TipModal({
             <AlertDescription>{txError}</AlertDescription>
           </Alert>
         )}
+        <Center>
+          <Link href='https://github.com/chasefleming/flipping' isExternal>
+            <Text fontSize='xs' pb={2} pt={5} color="grey">Add Flipping to Your Site</Text>
+          </Link>
+        </Center>
       </ModalContent>
     </Modal>,
     document.documentElement
