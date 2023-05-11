@@ -10,7 +10,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Lorem,
   Box,
   Slider,
   SliderTrack,
@@ -18,7 +17,6 @@ import {
   SliderThumb,
   SliderMark,
   Text,
-  Highlight,
   CircularProgress,
   CircularProgressLabel,
   Alert,
@@ -26,8 +24,6 @@ import {
   AlertTitle,
   AlertDescription,
   Image,
-  HStack,
-  VStack,
   Stack,
 } from "@chakra-ui/react"
 
@@ -48,7 +44,6 @@ export default function TipModal({
   const closeModal = useCallback(() => {
     setTxId(null)
     setTxProgress(null)
-    setTxError(null)
     handleClose()
   })
 
@@ -58,7 +53,7 @@ export default function TipModal({
       const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
-          arg(Number(selectedAmount).toFixed(1), t.UFix64),
+          arg(selectedAmount, t.UFix64),
           arg(address, t.Address),
         ],
       })
