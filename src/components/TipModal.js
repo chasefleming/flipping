@@ -133,51 +133,53 @@ export default function TipModal({
                   {'"'}
                 </Text>
               </Stack>
-              <Text className="modal-row">
-                <span>
-                  <Text as="b">{"To: "}</Text> {address}
-                </span>
-              </Text>
-              <Text pb={4} className="modal-row">
-                <span>
-                  <Text as="b">{"Amount: "}</Text> {selectedAmount}
-                  {" FLOW"}
-                </span>
-              </Text>
-              <Box pt={8} pb={2}>
-                <Slider
-                  aria-label="slider-ex-6"
-                  min={1}
-                  max={20}
-                  defaultValue={selectedAmount}
-                  onChange={(val) => setSelectedAmount(val)}
-                >
-                  <SliderMark value={5} {...labelStyles}>
-                    5 FLOW
-                  </SliderMark>
-                  <SliderMark value={10} {...labelStyles}>
-                    10 FLOW
-                  </SliderMark>
-                  <SliderMark value={15} {...labelStyles}>
-                    15 FLOW
-                  </SliderMark>
-                  <SliderMark
-                    value={selectedAmount}
-                    textAlign="center"
-                    bg="blue.500"
-                    borderRadius="5"
-                    color="white"
-                    mt="-10"
-                    ml="-5"
-                    w="20"
+              <Box maxW='sm' borderWidth='1px' borderRadius='lg' p={3}>
+                <Text className="modal-row">
+                  <span>
+                    <Text as="b">{"To: "}</Text> {address}
+                  </span>
+                </Text>
+                <Text pb={4} className="modal-row">
+                  <span>
+                    <Text as="b">{"Amount: "}</Text> {selectedAmount}
+                    {" FLOW"}
+                  </span>
+                </Text>
+                <Box pt={8} pb={2}>
+                  <Slider
+                    aria-label="slider-ex-6"
+                    min={1}
+                    max={20}
+                    defaultValue={selectedAmount}
+                    onChange={(val) => setSelectedAmount(val)}
                   >
-                    {selectedAmount} FLOW
-                  </SliderMark>
-                  <SliderTrack>
-                    <SliderFilledTrack />
-                  </SliderTrack>
-                  <SliderThumb />
-                </Slider>
+                    <SliderMark value={5} {...labelStyles}>
+                      5 FLOW
+                    </SliderMark>
+                    <SliderMark value={10} {...labelStyles}>
+                      10 FLOW
+                    </SliderMark>
+                    <SliderMark value={15} {...labelStyles}>
+                      15 FLOW
+                    </SliderMark>
+                    <SliderMark
+                      value={selectedAmount}
+                      textAlign="center"
+                      bg="blue.500"
+                      borderRadius="5"
+                      color="white"
+                      mt="-10"
+                      ml="-5"
+                      w="20"
+                    >
+                      {selectedAmount} FLOW
+                    </SliderMark>
+                    <SliderTrack>
+                      <SliderFilledTrack />
+                    </SliderTrack>
+                    <SliderThumb />
+                  </Slider>
+                </Box>
               </Box>
             </>
           )}
