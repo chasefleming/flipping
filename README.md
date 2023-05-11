@@ -9,8 +9,11 @@ The Flipping Widget is a simple, easy-to-use tipping widget for the [Flow blockc
 **Import the CSS and JavaScript files.** Place the following lines of code in your HTML file. Typically, these lines go in the <head> section of your HTML file, but they can be placed anywhere as long as they're loaded before the widget code.
 
 ```html
-<link href="widget/index.css" rel="stylesheet" />
-<script src="widget/index.js"></script>
+<link
+  href="https://cdn.jsdelivr.net/gh/chasefleming/flipping@latest/widget/index.css"
+  rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/gh/chasefleming/flipping@latest/widget/index.js"></script>
 ```
 
 ## Usage
