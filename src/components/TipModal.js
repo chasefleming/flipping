@@ -55,7 +55,7 @@ export default function TipModal({
       const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
-          arg(selectedAmount, t.UFix64),
+          arg(selectedAmount.toFixed(1), t.UFix64),
           arg(address, t.Address),
         ],
       })
@@ -137,7 +137,7 @@ export default function TipModal({
                   </Text>
                 </Stack>
               </Stack>
-              <Box maxW='sm' borderWidth='1px' borderRadius='lg' p={3}>
+              <Box maxW="sm" borderWidth="1px" borderRadius="lg" p={3}>
                 <Text className="modal-row">
                   <span>
                     <Text as="b">{"To: "}</Text> {address}
@@ -230,8 +230,10 @@ export default function TipModal({
           </Alert>
         )}
         <Center>
-          <Link href='https://github.com/chasefleming/flipping' isExternal>
-            <Text fontSize='xs' pb={2} pt={5} color="grey">Add Flipping to Your Site</Text>
+          <Link href="https://github.com/chasefleming/flipping" isExternal>
+            <Text fontSize="xs" pb={2} pt={5} color="grey">
+              Add Flipping to Your Site
+            </Text>
           </Link>
         </Center>
       </ModalContent>
