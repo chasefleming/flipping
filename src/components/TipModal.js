@@ -109,7 +109,7 @@ export default function TipModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {"Send a tip to: "}
+          {"Send a Tip To: "}
           {name}
         </ModalHeader>
         <ModalCloseButton />
