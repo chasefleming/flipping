@@ -116,18 +116,18 @@ export default function TipModal({
         <ModalBody pt="0">
           {txId === null && (
             <>
-              <Stack direction="row" align="center" pb="4">
+              <Stack direction="row" align="center" pb="10" pt="5">
                 {image && (
                   <Box pr="4">
                     <Image
-                      width="150px"
+                      width="125px"
                       borderRadius="full"
                       objectFit="cover"
                       src={image}
                     />
                   </Box>
                 )}
-                <Text fontSize="2xl" as="i" color="grey" className="modal-row">
+                <Text fontSize="xl" as="i" color="grey" className="modal-row">
                   {'"'}
                   {message}
                   {'"'}
