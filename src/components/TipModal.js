@@ -109,8 +109,7 @@ export default function TipModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {"Send a Tip To: "}
-          {name}
+          {"Send a Tip"}
         </ModalHeader>
         <ModalCloseButton />
         <ModalBody pt="0">
@@ -127,11 +126,16 @@ export default function TipModal({
                     />
                   </Box>
                 )}
-                <Text fontSize="xl" as="i" color="grey" className="modal-row">
-                  {'"'}
-                  {message}
-                  {'"'}
-                </Text>
+                <Stack>
+                  <Text fontSize="xl" as="i" color="grey" className="modal-row">
+                    {'"'}
+                    {message}
+                    {'"'}
+                  </Text>
+                  <Text fontSize="sm" color="grey">
+                    {` - ${name}`}
+                  </Text>
+                </Stack>
               </Stack>
               <Box maxW='sm' borderWidth='1px' borderRadius='lg' p={3}>
                 <Text className="modal-row">
