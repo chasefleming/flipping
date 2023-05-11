@@ -2,6 +2,8 @@
 
 The Flipping Widget is a simple, easy-to-use tipping widget for the [Flow blockchain](https://flow.com/). It allows you to quickly and easily accept tips from your visitors on your website or application. This guide will walk you through the steps necessary to integrate the Flipping Widget into your site.
 
+![Usage Screenshot](./screenshot.png)
+
 ## Installation
 
 **Import the CSS and JavaScript files.** Place the following lines of code in your HTML file. Typically, these lines go in the <head> section of your HTML file, but they can be placed anywhere as long as they're loaded before the widget code.
