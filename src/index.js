@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import "./index.css"
 import App from "./App"
 import { ChakraProvider } from "@chakra-ui/react"
@@ -8,7 +9,9 @@ const widgetDivs = document.querySelectorAll(".flipping-widget")
 
 // Inject our React App into each class
 widgetDivs.forEach((div) => {
-  ReactDOM.render(
+  const root = createRoot(div)
+
+  root.render(
     <React.StrictMode>
       <ChakraProvider>
         <App
@@ -23,7 +26,6 @@ widgetDivs.forEach((div) => {
           size={div.dataset.size}
         />
       </ChakraProvider>
-    </React.StrictMode>,
-    div
+    </React.StrictMode>
   )
 })
