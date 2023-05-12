@@ -55,7 +55,7 @@ export default function TipModal({
       const txId = await fcl.mutate({
         template: "https://flix.flow.com/v1/templates?name=transfer-flow",
         args: (arg, t) => [
-          arg(selectedAmount.toFixed(1), t.UFix64),
+          arg(Number(selectedAmount).toFixed(1), t.UFix64),
           arg(address, t.Address),
         ],
       })
