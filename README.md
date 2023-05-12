@@ -39,5 +39,9 @@ Here's what each attribute does:
   data-amount: This is the default tipping amount. Visitors can change this if they wish.
 - `data-name`: This is your display name. This will be shown on the widget.
 - `data-message`: This is a message to your visitors. You can use it to thank them for their donation or to encourage them to donate.
-- `data-bg-color`: This changes the background color of the widget. This should be any valid CSS color value. (_accepts most common color names...e.g. blue, red, green, etc._)
+- `data-color-scheme`: This handles coloring the background color and font color of the widget. (_accepts most common color names...e.g. blue, red, green, etc._)
+- `data-bg-color`: This changes the background color of the widget.
+- `data-color`: This changes the font color of the text.
 - `data-size`: This changes the size of the widget. This should be either `xs`, `sm`, `md`, or `lg`.
+
+**Note**: If using `data-color-scheme` it is suggested not to use `data-bg-color` or `data-color` as it will override the color scheme.

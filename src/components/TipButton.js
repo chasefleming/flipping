@@ -9,6 +9,8 @@ export default function TipButton({
   message,
   image,
   bgColor,
+  color,
+  colorScheme,
   size,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -27,7 +29,7 @@ export default function TipButton({
         isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
       />
-      <Button colorScheme={bgColor} size={size} onClick={sendTip}>
+      <Button backgroundColor={bgColor} color={color} colorScheme={colorScheme} size={size} onClick={sendTip}>
         Tip {address}
       </Button>
     </div>
