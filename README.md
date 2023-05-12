@@ -45,3 +45,20 @@ Here's what each attribute does:
 - `data-size`: This changes the size of the widget. This should be either `xs`, `sm`, `md`, or `lg`.
 
 **Note**: If using `data-color-scheme` it is suggested not to use `data-bg-color` or `data-color` as it will override the color scheme.
+
+## Customization
+
+If you'd like to customize the widget instead of using the button, you can use the `flipping-widget-custom` class instead of the `flipping-widget` class. This will allow you to use your own html to show the modal.
+
+```html
+<div
+  data-address="0x8104f28ece2b0beb"
+  data-amount="10.0"
+  data-name="Joe McHappy"
+  data-message="Hi I'm Joe McHappy, please donate me some FLOW!"
+  data-image="https://thumbs.dreamstime.com/b/portrait-happy-smiling-businessman-showing-thumbs-up-gesture-over-grey-background-business-success-concept-square-composition-203580140.jpg"
+  class="flipping-widget-custom"
+>
+  Click me
+</div>
+```

@@ -3,8 +3,10 @@ import ReactDOM from "react-dom"
 import "./index.css"
 import App from "./App"
 import { ChakraProvider } from "@chakra-ui/react"
+import CustomElement from "./components/CustomElement"
 
 const widgetDivs = document.querySelectorAll(".flipping-widget")
+const widgetDivsCustom = document.querySelectorAll(".flipping-widget-custom")
 
 // Inject our React App into each class
 widgetDivs.forEach((div) => {
@@ -27,3 +29,25 @@ widgetDivs.forEach((div) => {
     div
   )
 })
+
+widgetDivsCustom.forEach((div) => {
+  const children = div.textContent;
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <ChakraProvider>
+        <CustomElement
+          address={div.dataset.address}
+          amount={div.dataset.amount}
+          name={div.dataset.name}
+          message={div.dataset.message}
+          image={div.dataset.image}
+        >
+          {children}
+        </CustomElement>
+      </ChakraProvider>
+    </React.StrictMode>,
+    div
+  )
+})
+
