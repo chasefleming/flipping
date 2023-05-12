@@ -18,6 +18,8 @@ widgetDivs.forEach((div) => {
           message={div.dataset.message}
           image={div.dataset.image}
           bgColor={div.dataset.bgColor}
+          color={div.dataset.color}
+          colorScheme={div.dataset.colorScheme}
           size={div.dataset.size}
         />
       </ChakraProvider>
