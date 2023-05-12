@@ -33,9 +33,11 @@ widgetDivs.forEach((div) => {
 })
 
 widgetDivsCustom.forEach((div) => {
-  const children = div.textContent;
+  const children = div.textContent
 
-  ReactDOM.render(
+  const root = createRoot(div)
+
+  root.render(
     <React.StrictMode>
       <ChakraProvider>
         <CustomElement
@@ -48,8 +50,6 @@ widgetDivsCustom.forEach((div) => {
           {children}
         </CustomElement>
       </ChakraProvider>
-    </React.StrictMode>,
-    div
+    </React.StrictMode>
   )
 })
-
