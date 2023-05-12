@@ -27,7 +27,7 @@ The Flipping Widget is a simple, easy-to-use tipping widget for the [Flow blockc
   data-name="Joe Schmo"
   data-message="Hi I'm Joe Schmo, please donate!"
   class="flipping-widget"
-  data-bg-color="blue"
+  data-color-scheme="blue"
   data-size="md"
 ></div>
 ```
