@@ -46,7 +46,7 @@ Here's what each attribute does:
 
 **Note**: If using `data-color-scheme` it is suggested not to use `data-bg-color` or `data-color` as it will override the color scheme.
 
-## Customization
+## Customization (beta)
 
 If you'd like to customize the widget instead of using the button, you can use the `flipping-widget-custom` class instead of the `flipping-widget` class. This will allow you to use your own html to show the modal.
 
