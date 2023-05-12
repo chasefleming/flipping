@@ -217,9 +217,9 @@ export default function TipModal({
             <Button colorScheme="blue" mr={3} onClick={executeTransaction}>
               Send
             </Button>
-            <Button variant="ghost" onClick={closeModal}>
+            {/* <Button variant="ghost" onClick={closeModal}>
               Cancel
-            </Button>
+            </Button> */}
           </ModalFooter>
         )}
         {txError && (
