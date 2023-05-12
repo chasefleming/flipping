@@ -16,6 +16,8 @@ export default function TipButton({
     setIsModalOpen(true)
   }
 
+  const shortenedAddress = address.slice(0, 4) + "..." + address.slice(-3)
+
   return (
     <div>
       <TipModal
@@ -28,7 +30,7 @@ export default function TipButton({
         handleClose={() => setIsModalOpen(false)}
       />
       <Button colorScheme={bgColor} size={size} onClick={sendTip}>
-        Tip {address}
+        Tip {shortenedAddress}
       </Button>
     </div>
   )
