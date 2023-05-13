@@ -23,7 +23,7 @@
     "build": "REACT_APP_FLOW_NETWORK=mainnet react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:widget": "REACT_APP_FLOW_NETWORK=mainnet parcel build src/index.js --no-source-maps --dist-dir widget && cp build/static/css/*.css widget/index.css"
+    "build:widget": "REACT_APP_FLOW_NETWORK=mainnet parcel build src/index.js --no-source-maps --dist-dir widget"
   },
   "eslintConfig": {
     "extends": [

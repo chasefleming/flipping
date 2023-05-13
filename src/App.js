@@ -1,4 +1,3 @@
-import "./App.css"
 import TipButton from "./components/TipButton"
 import "./config/fcl"
 
