@@ -1,22 +1,11 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 import App from "./App"
-import { ChakraProvider, extendTheme } from "@chakra-ui/react"
+import { ChakraProvider } from "@chakra-ui/react"
 import CustomElement from "./components/CustomElement"
 
 const widgetDivs = document.querySelectorAll(".flipping-widget")
 const widgetDivsCustom = document.querySelectorAll(".flipping-widget-custom")
-
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        bg: "unset",
-        color: "unset",
-      },
-    },
-  },
-})
 
 // Inject our React App into each class
 widgetDivs.forEach((div) => {
@@ -24,7 +13,7 @@ widgetDivs.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider resetScope=".ck-reset">
         <App
           address={div.dataset.address}
           amount={div.dataset.amount}
@@ -48,7 +37,7 @@ widgetDivsCustom.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider resetScope=".ck-reset">
         <CustomElement
           address={div.dataset.address}
           amount={div.dataset.amount}
