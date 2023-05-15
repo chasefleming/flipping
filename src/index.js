@@ -1,7 +1,5 @@
 import React from "react"
-import ReactDOM from "react-dom"
 import { createRoot } from "react-dom/client"
-import "./index.css"
 import App from "./App"
 import { ChakraProvider } from "@chakra-ui/react"
 import CustomElement from "./components/CustomElement"
@@ -15,18 +13,20 @@ widgetDivs.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider>
-        <App
-          address={div.dataset.address}
-          amount={div.dataset.amount}
-          name={div.dataset.name}
-          message={div.dataset.message}
-          image={div.dataset.image}
-          bgColor={div.dataset.bgColor}
-          color={div.dataset.color}
-          colorScheme={div.dataset.colorScheme}
-          size={div.dataset.size}
-        />
+      <ChakraProvider cssVarsRoot='#flipping-root'>
+        <div id="flipping-root">
+          <App
+            address={div.dataset.address}
+            amount={div.dataset.amount}
+            name={div.dataset.name}
+            message={div.dataset.message}
+            image={div.dataset.image}
+            bgColor={div.dataset.bgColor}
+            color={div.dataset.color}
+            colorScheme={div.dataset.colorScheme}
+            size={div.dataset.size}
+          />
+        </div>
       </ChakraProvider>
     </React.StrictMode>
   )
@@ -39,16 +39,18 @@ widgetDivsCustom.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider>
-        <CustomElement
-          address={div.dataset.address}
-          amount={div.dataset.amount}
-          name={div.dataset.name}
-          message={div.dataset.message}
-          image={div.dataset.image}
-        >
-          {children}
-        </CustomElement>
+      <ChakraProvider cssVarsRoot='#flipping-root'>
+        <div id="flipping-root">
+          <CustomElement
+            address={div.dataset.address}
+            amount={div.dataset.amount}
+            name={div.dataset.name}
+            message={div.dataset.message}
+            image={div.dataset.image}
+          >
+            {children}
+          </CustomElement>
+        </div>
       </ChakraProvider>
     </React.StrictMode>
   )
