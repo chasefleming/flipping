@@ -13,8 +13,8 @@ widgetDivs.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <div id="flipping-root">
-        <ChakraProvider cssVarsRoot='#flipping-root'>
+      <ChakraProvider cssVarsRoot='#flipping-root'>
+        <div id="flipping-root">
           <App
             address={div.dataset.address}
             amount={div.dataset.amount}
@@ -26,8 +26,8 @@ widgetDivs.forEach((div) => {
             colorScheme={div.dataset.colorScheme}
             size={div.dataset.size}
           />
-        </ChakraProvider>
-      </div>
+        </div>
+      </ChakraProvider>
     </React.StrictMode>
   )
 })
@@ -39,8 +39,8 @@ widgetDivsCustom.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <div id="flipping-root">
-        <ChakraProvider cssVarsRoot='#flipping-root'>
+      <ChakraProvider cssVarsRoot='#flipping-root'>
+        <div id="flipping-root">
           <CustomElement
             address={div.dataset.address}
             amount={div.dataset.amount}
@@ -50,8 +50,8 @@ widgetDivsCustom.forEach((div) => {
           >
             {children}
           </CustomElement>
-        </ChakraProvider>
-      </div>
+        </div>
+      </ChakraProvider>
     </React.StrictMode>
   )
 })
