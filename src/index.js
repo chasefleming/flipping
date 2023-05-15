@@ -13,19 +13,21 @@ widgetDivs.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider resetScope=".ck-reset">
-        <App
-          address={div.dataset.address}
-          amount={div.dataset.amount}
-          name={div.dataset.name}
-          message={div.dataset.message}
-          image={div.dataset.image}
-          bgColor={div.dataset.bgColor}
-          color={div.dataset.color}
-          colorScheme={div.dataset.colorScheme}
-          size={div.dataset.size}
-        />
-      </ChakraProvider>
+      <div id="flipping-root">
+        <ChakraProvider cssVarsRoot='#flipping-root'>
+          <App
+            address={div.dataset.address}
+            amount={div.dataset.amount}
+            name={div.dataset.name}
+            message={div.dataset.message}
+            image={div.dataset.image}
+            bgColor={div.dataset.bgColor}
+            color={div.dataset.color}
+            colorScheme={div.dataset.colorScheme}
+            size={div.dataset.size}
+          />
+        </ChakraProvider>
+      </div>
     </React.StrictMode>
   )
 })
@@ -37,17 +39,19 @@ widgetDivsCustom.forEach((div) => {
 
   root.render(
     <React.StrictMode>
-      <ChakraProvider resetScope=".ck-reset">
-        <CustomElement
-          address={div.dataset.address}
-          amount={div.dataset.amount}
-          name={div.dataset.name}
-          message={div.dataset.message}
-          image={div.dataset.image}
-        >
-          {children}
-        </CustomElement>
-      </ChakraProvider>
+      <div id="flipping-root">
+        <ChakraProvider cssVarsRoot='#flipping-root'>
+          <CustomElement
+            address={div.dataset.address}
+            amount={div.dataset.amount}
+            name={div.dataset.name}
+            message={div.dataset.message}
+            image={div.dataset.image}
+          >
+            {children}
+          </CustomElement>
+        </ChakraProvider>
+      </div>
     </React.StrictMode>
   )
 })
